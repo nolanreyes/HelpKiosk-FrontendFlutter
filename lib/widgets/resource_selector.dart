@@ -31,7 +31,7 @@ class ResourceSelector extends StatelessWidget {
       ResourceButton(
         icon: Icons.local_hospital,
         label: 'Health',
-        onTap: () => locationsController.applyFilter('HEALTHCARE'),
+        onTap: () => locationsController.applyFilter('HEALTH'),
       ),
       ResourceButton(
         icon: Icons.shower,
