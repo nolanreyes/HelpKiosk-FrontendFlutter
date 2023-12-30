@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:helpkiosk_frontend/controllers/locations_controller.dart';
+import 'package:helpkiosk_frontend/controllers/location_service.dart';
+import 'package:helpkiosk_frontend/models/locations.dart';
 
 class MapContent extends StatefulWidget {
   @override
@@ -15,6 +17,51 @@ class _MapContentState extends State<MapContent> {
   void initState() {
     super.initState();
     locationsController.fetchLocations();
+    locationsController.onMarkerTap = handleMarkerTap;
+  }
+
+  void handleMarkerTap(Location location) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 120,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(location.resourceName,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+              SizedBox(height: 10),
+              TextButton(
+                child: Text("Get Directions"),
+                onPressed: () async {
+                  // Create an instance of LocationService or obtain it from LocationsController
+                  LocationService locationService = LocationService();
+
+                  try {
+                    LatLng currentLocation =
+                        await locationService.getCurrentLocation();
+                    LatLng destinationLocation =
+                        LatLng(location.latitude, location.longitude);
+
+                    // Call getDirections with currentLocation and destinationLocation
+                    await locationService.getDirections(
+                        currentLocation, destinationLocation);
+
+                    // Handle the directions data as needed
+                    Navigator.pop(context); // Close the bottom sheet
+                  } catch (error) {
+                    // Handle any errors, such as location service disabled or permissions denied
+                    print("Error getting directions: $error");
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override

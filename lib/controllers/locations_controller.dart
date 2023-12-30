@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:helpkiosk_frontend/models/locations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+
+typedef MarkerTapCallback = void Function(Location location);
 
 class LocationsController extends GetxController {
   List<Location> location = <Location>[].obs;
@@ -12,6 +12,8 @@ class LocationsController extends GetxController {
   var filteredMarkers = RxSet<Marker>();
   var isLoading = false.obs;
   var filterType = ''.obs;
+  var selectedLocation = Rx<LatLng?>(null);
+  late MarkerTapCallback onMarkerTap;
 
   fetchLocations() async {
     try {
@@ -35,17 +37,20 @@ class LocationsController extends GetxController {
   }
 
   createMarkers() {
+    markers.clear(); // Clear existing markers before adding new ones
     location.forEach((element) {
       markers.add(Marker(
-          markerId: MarkerId(element.id.toString()),
-          icon: BitmapDescriptor.defaultMarkerWithHue(
-              BitmapDescriptor.hueMagenta),
-          position: LatLng(element.latitude, element.longitude),
-          infoWindow: InfoWindow(
-              title: element.resourceName, snippet: element.locationType),
-          onTap: () {
-            print('tapped');
-          }));
+        markerId: MarkerId(element.id.toString()),
+        icon:
+            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+        position: LatLng(element.latitude, element.longitude),
+        infoWindow: InfoWindow(
+            title: element.resourceName, snippet: element.locationType),
+        onTap: () {
+          selectedLocation.value = LatLng(element.latitude, element.longitude);
+          onMarkerTap(element);
+        },
+      ));
     });
     applyFilter(filterType.value);
   }

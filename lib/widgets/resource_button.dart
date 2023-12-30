@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // If you're using GetX features within the widget
 
 class ResourceButton extends StatelessWidget {
   final IconData icon;

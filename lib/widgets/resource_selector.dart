@@ -14,7 +14,7 @@ class ResourceSelector extends StatelessWidget {
 
     List<Widget> buttons = [
       ResourceButton(
-        icon: Icons.home,
+        icon: Icons.view_list,
         label: 'All',
         onTap: () => locationsController.applyFilter(''),
       ),
