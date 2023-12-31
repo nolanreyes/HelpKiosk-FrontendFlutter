@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:helpkiosk_frontend/widgets/map_widget.dart';
 import 'package:helpkiosk_frontend/widgets/resource_selector.dart';
+import 'weather_widget.dart'; // Import the WeatherDisplay widget
 
 class ResponsiveLayout extends StatelessWidget {
   @override
@@ -11,25 +12,43 @@ class ResponsiveLayout extends StatelessWidget {
     return Container(
       color: Colors.grey[200],
       child: isLargeScreen
-          ? Row(
+          ? Column(
               children: <Widget>[
+                WeatherDisplay(), // Weather bar at the top
                 Expanded(
-                  flex: 3, // 3 parts of the screen for the map
-                  child: MapWidget(),
-                ),
-                Expanded(
-                  flex: 1, // 1 part of the screen for the resource selector
-                  child: ResourceSelector(),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 3, // 3 parts of the screen for the map
+                        child: MapWidget(),
+                      ),
+                      Expanded(
+                        flex:
+                            1, // 1 part of the screen for the resource selector
+                        child: ResourceSelector(),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             )
           : Column(
               children: <Widget>[
+                WeatherDisplay(), // Weather bar at the top
                 Expanded(
-                  flex: 3, // 3 parts of the screen for the map
-                  child: MapWidget(),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: 3, // 3 parts of the screen for the map
+                        child: MapWidget(),
+                      ),
+                      Expanded(
+                        child:
+                            ResourceSelector(), // Resource selector takes remaining space
+                      ),
+                    ],
+                  ),
                 ),
-                ResourceSelector(), // No flex, fixed height as needed
               ],
             ),
     );

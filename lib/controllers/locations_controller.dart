@@ -42,7 +42,7 @@ class LocationsController extends GetxController {
       markers.add(Marker(
         markerId: MarkerId(element.id.toString()),
         icon:
-            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
+            BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         position: LatLng(element.latitude, element.longitude),
         infoWindow: InfoWindow(
             title: element.resourceName, snippet: element.locationType),

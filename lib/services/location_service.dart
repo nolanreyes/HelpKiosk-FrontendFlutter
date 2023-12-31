@@ -1,12 +1,11 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:helpkiosk_frontend/models/directions.dart';
-//import 'package:helpkiosk_frontend/models/locations.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class LocationService {
-  final String key ='AIzaSyBm6quTRYvW39Lb84RSJ4QYtp3z4J26ffs';
+  final String key = 'AIzaSyBm6quTRYvW39Lb84RSJ4QYtp3z4J26ffs';
   final Location location = Location();
 
   Future<LatLng> getCurrentLocation() async {
