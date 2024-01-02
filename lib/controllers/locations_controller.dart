@@ -61,7 +61,6 @@ class LocationsController extends GetxController {
     if (type.isEmpty) {
       filteredMarkers.addAll(markers);
     } else {
-      // Use the set of location IDs for comparison to avoid null issues
       var locationIdsWithType = location
           .where((loc) => loc.locationType == type)
           .map((loc) => loc.id)
@@ -69,7 +68,6 @@ class LocationsController extends GetxController {
 
       filteredMarkers.addAll(markers.where((marker) {
         var locationId = int.tryParse(marker.markerId.value);
-        // Check if the locationId is in the set of IDs with the correct type
         return locationId != null && locationIdsWithType.contains(locationId);
       }));
     }
