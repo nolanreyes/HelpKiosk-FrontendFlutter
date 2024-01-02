@@ -37,7 +37,8 @@ class LocationsController extends GetxController {
   }
 
   createMarkers() {
-    markers.clear(); // Clear existing markers before adding new ones
+    // Clear markers before adding new ones
+    markers.clear();
     location.forEach((element) {
       markers.add(Marker(
         markerId: MarkerId(element.id.toString()),

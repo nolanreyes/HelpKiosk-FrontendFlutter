@@ -6,7 +6,7 @@ import 'weather_widget.dart'; // Import the WeatherDisplay widget
 class ResponsiveLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Determine if we're on a large screen
+    // Are we on a large screen?
     bool isLargeScreen = MediaQuery.of(context).size.width > 768;
 
     return Container(

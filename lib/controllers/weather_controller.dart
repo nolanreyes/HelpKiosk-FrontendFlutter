@@ -5,7 +5,6 @@ import '../models/weather.dart';
 import 'dart:developer';
 
 class WeatherController extends GetxController {
-  // Observable variables for weather data
   RxDouble temperature = RxDouble(0.0);
   RxString description = RxString('');
   RxInt pressure = RxInt(0);
@@ -20,7 +19,7 @@ class WeatherController extends GetxController {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final weather = Weather.fromJson(jsonData);
-        // Print weather data to the console
+        // test to print weather data to the console
         log('Temperature: ${weather.temperature}°C');
         log('Description: ${weather.description}');
 
