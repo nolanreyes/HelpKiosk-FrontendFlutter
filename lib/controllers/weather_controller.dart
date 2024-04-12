@@ -16,7 +16,7 @@ class WeatherController extends GetxController {
   Future<void> fetchWeatherData() async {
     print('fetchWeatherData() called');
     try {
-      final response = await http.get(Uri.parse('$apiUrl/assistanceapp/api/weather/'));
+      final response = await http.get(Uri.parse('$apiUrl/assistanceapp/api/weather/wait'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final weather = Weather.fromJson(jsonData);

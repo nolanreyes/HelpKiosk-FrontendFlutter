@@ -68,13 +68,28 @@ class _MapContentState extends State<MapContent> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (locationsController.location.isNotEmpty) {
-        return GoogleMap(
-          initialCameraPosition: CameraPosition(
-            target: LatLng(locationsController.location.first.latitude,
-                locationsController.location.first.longitude),
-            zoom: 13,
-          ),
-          markers: locationsController.filteredMarkers.toSet(),
+        return Stack(
+          children: [
+            GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(locationsController.location.first.latitude,
+                    locationsController.location.first.longitude),
+                zoom: 13,
+              ),
+              markers: locationsController.filteredMarkers.toSet(),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                // Set the corners as rounded
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.white, // Set border color
+                  width: 5.0, // Set border width
+                ),
+              ),
+            ),
+          ],
         );
       } else {
         return Center(child: CircularProgressIndicator());

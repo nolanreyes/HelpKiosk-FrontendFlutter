@@ -20,7 +20,7 @@ class ResourceSelector extends StatelessWidget {
       ),
       ResourceButton(
         icon: Icons.local_hotel,
-        label: 'Housing',
+        label: 'Shelter',
         onTap: () => locationsController.applyFilter('SHELTER'),
       ),
       ResourceButton(
@@ -48,43 +48,29 @@ class ResourceSelector extends StatelessWidget {
         label: 'WiFi',
         onTap: () => locationsController.applyFilter('WIFI'),
       ),
-
     ];
 
     return Container(
-      color: Colors.grey[200],
+      decoration: BoxDecoration(
+        color: Colors.white, // Change the background color here
+        borderRadius: BorderRadius.circular(10.0), // Set the corners as rounded
+      ),
       padding: EdgeInsets.all(8),
       child: isLargeScreen
           ? GridView.count(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: buttons,
-      )
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: buttons,
+            )
           : Wrap(
-        spacing: 8, // Horizontal spacing between buttons
-        runSpacing: 8, // Vertical spacing between buttons
-        alignment: WrapAlignment.spaceEvenly,
-        children: buttons,
-      ),
-    );
-  }
-}
-
-class FilterButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-
-  const FilterButton({Key? key, required this.text, required this.onPressed})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: Text(text),
-      onPressed: onPressed,
+              spacing: 8, // Horizontal spacing between buttons
+              runSpacing: 8, // Vertical spacing between buttons
+              alignment: WrapAlignment.spaceEvenly,
+              children: buttons,
+            ),
     );
   }
 }

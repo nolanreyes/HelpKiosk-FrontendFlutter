@@ -49,7 +49,10 @@ class BalanceDisplayState extends State<BalanceDisplay> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      decoration: BoxDecoration(
+        color: Colors.white, // Change the background color here
+        borderRadius: BorderRadius.circular(10.0), // Set the corners as rounded
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50.0),
         child: Row(
@@ -65,9 +68,11 @@ class BalanceDisplayState extends State<BalanceDisplay> {
               height: 70,
               child: FloatingActionButton(
                 onPressed: toggleBalanceVisibility,
-                backgroundColor: Colors.blue, // Call the new method here
+                backgroundColor: Color(0xFF8247FF),
+                foregroundColor: Colors.white,// Call the new method here
                 child: Icon(
-                  _isBalanceHidden ? Icons.credit_card : Icons.visibility_off, // Changes the icon based on _isBalanceHidden
+                  _isBalanceHidden ? Icons.credit_card : Icons.visibility_off,
+                  // Changes the icon based on _isBalanceHidden
                   size: 40,
                 ),
               ),
