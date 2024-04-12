@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:helpkiosk_frontend/models/locations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:helpkiosk_frontend/constants.dart';
 
 typedef MarkerTapCallback = void Function(Location location);
 
@@ -19,7 +20,7 @@ class LocationsController extends GetxController {
     try {
       isLoading(true);
       http.Response response =
-          await http.get(Uri.parse('https://dylannolan.com/api/locations/'));
+          await http.get(Uri.parse('$apiUrl/assistanceapp/api/locations/'));
       if (response.statusCode == 200) {
         var jsonData = jsonDecode(response.body);
         var results = jsonData['results'] as List;

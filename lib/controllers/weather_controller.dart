@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/weather.dart';
 import 'dart:developer';
+import 'package:helpkiosk_frontend/constants.dart';
 
 class WeatherController extends GetxController {
   RxDouble temperature = RxDouble(0.0);
@@ -15,7 +16,7 @@ class WeatherController extends GetxController {
   Future<void> fetchWeatherData() async {
     print('fetchWeatherData() called');
     try {
-      final response = await http.get(Uri.parse('https://dylannolan.com/api/weather/'));
+      final response = await http.get(Uri.parse('$apiUrl/assistanceapp/api/weather/'));
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         final weather = Weather.fromJson(jsonData);

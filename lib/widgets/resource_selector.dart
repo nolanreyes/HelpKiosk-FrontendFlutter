@@ -48,7 +48,7 @@ class ResourceSelector extends StatelessWidget {
         label: 'WiFi',
         onTap: () => locationsController.applyFilter('WIFI'),
       ),
-      Container(),
+
     ];
 
     return Container(
