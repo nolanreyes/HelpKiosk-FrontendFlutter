@@ -5,22 +5,27 @@ import 'package:helpkiosk_frontend/controllers/locations_controller.dart';
 import 'package:helpkiosk_frontend/services/location_service.dart';
 import 'package:helpkiosk_frontend/models/locations.dart';
 
+// Widget for displaying the map content
 class MapContent extends StatefulWidget {
   @override
   _MapContentState createState() => _MapContentState();
 }
 
 class _MapContentState extends State<MapContent> {
+  // Initialize the locations controller
   LocationsController locationsController = Get.put(LocationsController());
 
   @override
   void initState() {
     super.initState();
+    // Fetch locations and set the marker tap handler on initialization
     locationsController.fetchLocations();
     locationsController.onMarkerTap = handleMarkerTap;
   }
 
+  // Handler for when a marker is tapped
   void handleMarkerTap(Location location) {
+    // Show a bottom sheet with location details and a button for getting directions
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -36,7 +41,6 @@ class _MapContentState extends State<MapContent> {
               TextButton(
                 child: Text("Get Directions"),
                 onPressed: () async {
-                  // Create an instance of LocationService or obtain it from LocationsController
                   LocationService locationService = LocationService();
 
                   try {
@@ -45,14 +49,11 @@ class _MapContentState extends State<MapContent> {
                     LatLng destinationLocation =
                         LatLng(location.latitude, location.longitude);
 
-                    // Call getDirections with currentLocation and destinationLocation
                     await locationService.getDirections(
                         currentLocation, destinationLocation);
 
-                    // Handle the directions data as needed
-                    Navigator.pop(context); // Close the bottom sheet
+                    Navigator.pop(context);
                   } catch (error) {
-                    // Handle any errors, such as location service disabled or permissions denied
                     print("Error getting directions: $error");
                   }
                 },
@@ -66,6 +67,7 @@ class _MapContentState extends State<MapContent> {
 
   @override
   Widget build(BuildContext context) {
+    // Use Obx to reactively update the map when the locations change
     return Obx(() {
       if (locationsController.location.isNotEmpty) {
         return Stack(
@@ -81,26 +83,27 @@ class _MapContentState extends State<MapContent> {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
-                // Set the corners as rounded
                 color: Colors.transparent,
                 border: Border.all(
-                  color: Colors.white, // Set border color
-                  width: 5.0, // Set border width
+                  color: Colors.white,
+                  width: 5.0,
                 ),
               ),
             ),
           ],
         );
       } else {
+        // Show a loading spinner if the locations are not yet loaded
         return Center(child: CircularProgressIndicator());
       }
     });
   }
 }
 
+// Widget for displaying the map
 class MapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MapContent(); // Use the refactored map content widget
+    return MapContent();
   }
 }

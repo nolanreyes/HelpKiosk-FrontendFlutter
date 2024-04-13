@@ -9,52 +9,42 @@ class ResourceSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //Responsive
     bool isLargeScreen = MediaQuery.of(context).size.width > 768;
 
     List<Widget> buttons = [
       ResourceButton(
-        icon: Icons.view_list,
-        label: 'All',
-        onTap: () => locationsController.applyFilter(''),
-      ),
+          icon: Icons.view_list,
+          label: 'All',
+          onTap: () => locationsController.applyFilter('')),
       ResourceButton(
-        icon: Icons.local_hotel,
-        label: 'Shelter',
-        onTap: () => locationsController.applyFilter('SHELTER'),
-      ),
+          icon: Icons.local_hotel,
+          label: 'Shelter',
+          onTap: () => locationsController.applyFilter('SHELTER')),
       ResourceButton(
-        icon: Icons.restaurant,
-        label: 'Food',
-        onTap: () => locationsController.applyFilter('FOOD'),
-      ),
+          icon: Icons.restaurant,
+          label: 'Food',
+          onTap: () => locationsController.applyFilter('FOOD')),
       ResourceButton(
-        icon: Icons.local_hospital,
-        label: 'Health',
-        onTap: () => locationsController.applyFilter('HEALTH'),
-      ),
+          icon: Icons.local_hospital,
+          label: 'Health',
+          onTap: () => locationsController.applyFilter('HEALTH')),
       ResourceButton(
-        icon: Icons.shower,
-        label: 'Hygiene',
-        onTap: () => locationsController.applyFilter('HYGIENE'),
-      ),
+          icon: Icons.shower,
+          label: 'Hygiene',
+          onTap: () => locationsController.applyFilter('HYGIENE')),
       ResourceButton(
-        icon: Icons.gavel,
-        label: 'Legal',
-        onTap: () => locationsController.applyFilter('LEGAL'),
-      ),
+          icon: Icons.gavel,
+          label: 'Legal',
+          onTap: () => locationsController.applyFilter('LEGAL')),
       ResourceButton(
-        icon: Icons.wifi,
-        label: 'WiFi',
-        onTap: () => locationsController.applyFilter('WIFI'),
-      ),
+          icon: Icons.wifi,
+          label: 'WiFi',
+          onTap: () => locationsController.applyFilter('WIFI')),
     ];
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // Change the background color here
-        borderRadius: BorderRadius.circular(10.0), // Set the corners as rounded
-      ),
+          color: Colors.white, borderRadius: BorderRadius.circular(10.0)),
       padding: EdgeInsets.all(8),
       child: isLargeScreen
           ? GridView.count(
@@ -63,14 +53,12 @@ class ResourceSelector extends StatelessWidget {
               mainAxisSpacing: 50,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              children: buttons,
-            )
+              children: buttons)
           : Wrap(
-              spacing: 8, // Horizontal spacing between buttons
-              runSpacing: 8, // Vertical spacing between buttons
+              spacing: 8,
+              runSpacing: 8,
               alignment: WrapAlignment.spaceEvenly,
-              children: buttons,
-            ),
+              children: buttons),
     );
   }
 }

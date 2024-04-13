@@ -15,27 +15,25 @@ class BalanceDisplayState extends State<BalanceDisplay> {
   bool _isBalanceHidden = true;
   bool _isButtonPressed = false;
 
+  // Fetches the user balance from the server
   void getUserBalance() async {
     final response =
         await http.get(Uri.parse('$apiUrl/helpfinance/get_user_balance/'));
-
     if (response.statusCode == 200) {
-      // If the server returns a 200 OK response, parse the JSON.
       Map<String, dynamic> json = jsonDecode(response.body);
       setState(() {
-        _userBalance =
-            double.parse(json['balance']); // Convert String to double
-        _isButtonPressed = true; // Set _isButtonPressed to true
-        _isBalanceHidden = false; // Set _isBalanceHidden to false
+        _userBalance = double.parse(json['balance']);
+        _isButtonPressed = true;
+        _isBalanceHidden = false;
       });
       print('User balance: $_userBalance');
     } else {
-      // If the server returns an unsuccessful response code, throw an exception.
       throw Exception('Failed to load user balance');
     }
   }
 
-  void toggleBalanceVisibility() {
+  // changes the visibility of the user balance
+  void changeBalanceVisibility() {
     if (_isBalanceHidden && !_isButtonPressed) {
       getUserBalance();
     } else {
@@ -50,8 +48,8 @@ class BalanceDisplayState extends State<BalanceDisplay> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // Change the background color here
-        borderRadius: BorderRadius.circular(10.0), // Set the corners as rounded
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -67,12 +65,11 @@ class BalanceDisplayState extends State<BalanceDisplay> {
               width: 70,
               height: 70,
               child: FloatingActionButton(
-                onPressed: toggleBalanceVisibility,
+                onPressed: changeBalanceVisibility,
                 backgroundColor: Color(0xFF8247FF),
-                foregroundColor: Colors.white,// Call the new method here
+                foregroundColor: Colors.white,
                 child: Icon(
                   _isBalanceHidden ? Icons.credit_card : Icons.visibility_off,
-                  // Changes the icon based on _isBalanceHidden
                   size: 40,
                 ),
               ),
