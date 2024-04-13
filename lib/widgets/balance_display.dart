@@ -54,13 +54,13 @@ class BalanceDisplayState extends State<BalanceDisplay> {
         borderRadius: BorderRadius.circular(10.0), // Set the corners as rounded
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(
           children: <Widget>[
             Expanded(
               child: Text(
                 'Balance: ${_isBalanceHidden ? '****' : (_userBalance?.toString() ?? 'Loading...')}',
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(fontSize: 18),
               ),
             ),
             Container(
