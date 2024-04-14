@@ -35,7 +35,7 @@ class _ChatBotWidgetState extends State<ChatBotWidget> {
                   // Microphone button
                   IconButton(
                     icon: Icon(Icons.mic),
-                    iconSize: 100.0,
+                    iconSize: 90.0,
                     onPressed: () {
                       // TODO: Handle voice input
                     },
@@ -44,7 +44,7 @@ class _ChatBotWidgetState extends State<ChatBotWidget> {
                   Expanded(
                     child: Text(
                       _greetingMessage,
-                      style: TextStyle(fontSize: 40.0),
+                      style: TextStyle(fontSize: 30.0),
                     ),
                   ),
                 ],

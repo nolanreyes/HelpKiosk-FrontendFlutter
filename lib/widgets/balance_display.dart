@@ -49,7 +49,7 @@ class BalanceDisplayState extends State<BalanceDisplay> {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -58,11 +58,11 @@ class BalanceDisplayState extends State<BalanceDisplay> {
             Expanded(
               child: Text(
                 'Balance: ${_isBalanceHidden ? '****' : (_userBalance?.toString() ?? 'Loading...')}',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 22),
               ),
             ),
             Container(
-              width: 70,
+              width:70,
               height: 70,
               child: FloatingActionButton(
                 onPressed: changeBalanceVisibility,
@@ -70,7 +70,7 @@ class BalanceDisplayState extends State<BalanceDisplay> {
                 foregroundColor: Colors.white,
                 child: Icon(
                   _isBalanceHidden ? Icons.credit_card : Icons.visibility_off,
-                  size: 35,
+                  size: 40,
                 ),
               ),
             ),
