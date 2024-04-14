@@ -52,7 +52,7 @@ class BalanceDisplayState extends State<BalanceDisplay> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: <Widget>[
             Expanded(
@@ -70,7 +70,7 @@ class BalanceDisplayState extends State<BalanceDisplay> {
                 foregroundColor: Colors.white,
                 child: Icon(
                   _isBalanceHidden ? Icons.credit_card : Icons.visibility_off,
-                  size: 40,
+                  size: 35,
                 ),
               ),
             ),

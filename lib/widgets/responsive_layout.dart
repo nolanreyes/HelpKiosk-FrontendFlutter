@@ -27,6 +27,7 @@ class ResponsiveLayout extends StatelessWidget {
                           flex: 3,
                           child: Column(
                             children: <Widget>[
+                              // Widgets for the left section of the interface
                               Expanded(
                                 flex: 4,
                                 child: _roundedContainer(MapWidget()),
@@ -42,6 +43,7 @@ class ResponsiveLayout extends StatelessWidget {
                           flex: 1,
                           child: Column(
                             children: <Widget>[
+                              // Widgets for the right section of the interface
                               Expanded(
                                 flex: 4,
                                 child: _roundedContainer(ResourceSelector()),
