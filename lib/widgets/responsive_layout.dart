@@ -5,49 +5,69 @@ import 'package:helpkiosk_frontend/widgets/balance_display.dart';
 import 'package:helpkiosk_frontend/widgets/weather_widget.dart';
 import 'package:helpkiosk_frontend/widgets/chatbot_widget.dart';
 
-class ResponsiveLayout extends StatelessWidget {
+class ResponsiveLayout extends StatefulWidget {
+  @override
+  _ResponsiveLayoutState createState() => _ResponsiveLayoutState();
+}
+
+class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+  Key key = UniqueKey();
+
+  // Reload button for  demo
+  void reloadPage() {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (BuildContext context) => super.widget,
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
-    // Are we on a large screen?
     bool isLargeScreen = MediaQuery.of(context).size.width > 768;
 
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('H E L P  A P P'),
+        centerTitle: false,
+      ),
+      body: Container(
         color: Colors.grey[200],
         child: isLargeScreen
             ? Column(
                 children: <Widget>[
-                  WeatherDisplay(), // Weather bar at the top
                   Expanded(
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          flex: 3, // 3 parts of the screen for the map
+                          flex: 3,
                           child: Column(
                             children: <Widget>[
+                              // Widgets for the left section of the interface
                               Expanded(
                                 flex: 4,
-                                child: MapWidget(),
+                                child: _roundedContainer(MapWidget()),
                               ),
                               Expanded(
                                 flex: 1,
-                                child:
-                                    ChatBotWidget(), // Add ChatBotWidget here
+                                child: _roundedContainer(ChatBotWidget()),
                               ),
                             ],
                           ),
                         ),
                         Expanded(
-                          flex:
-                              1, // 1 part of the screen for the resource selector
+                          flex: 1,
                           child: Column(
                             children: <Widget>[
+                              // Widgets for the right section of the interface
                               Expanded(
                                 flex: 4,
-                                child: ResourceSelector(),
+                                child: _roundedContainer(ResourceSelector()),
                               ),
                               Expanded(
                                 flex: 1,
-                                child: BalanceDisplay(),
+                                child: _roundedContainer(BalanceDisplay()),
                               ),
                             ],
                           ),
@@ -59,23 +79,37 @@ class ResponsiveLayout extends StatelessWidget {
               )
             : Column(
                 children: <Widget>[
-                  WeatherDisplay(), // Weather bar at the top
                   Expanded(
-                    child: MapWidget(),
+                    child: _roundedContainer(MapWidget()),
                   ),
                   Container(
-                    height: 100,
-                    // Set a fixed height for the ResourceSelector
+                    height: 120,
                     width: double.infinity,
-                    // Make it take up the full width of the screen
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        ResourceSelector(),
+                        _roundedContainer(ResourceSelector()),
                       ],
                     ),
                   ),
                 ],
-              ));
+              ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: reloadPage,
+        child: Icon(Icons.refresh),
+      ),
+    );
+  }
+
+  Widget _roundedContainer(Widget child) {
+    return Container(
+      margin: EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.grey[200],
+      ),
+      child: child,
+    );
   }
 }

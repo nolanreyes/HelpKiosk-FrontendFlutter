@@ -22,7 +22,7 @@ class ResourceButton extends StatelessWidget {
           CircleAvatar(
             radius: 30,
             // Size of the circle avatar
-            backgroundColor: Colors.blue,
+            backgroundColor: Color(0xFF8247FF),
             // Background color of the circle avatar
             child: Icon(icon,
                 size: 30, color: Colors.white), // Icon inside the circle avatar

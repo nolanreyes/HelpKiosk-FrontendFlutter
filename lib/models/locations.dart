@@ -21,14 +21,14 @@ class Location {
 
   factory Location.fromJson(Map<String, dynamic> json) {
     return Location(
-      id: json['id'],
-      resourceName: json['resource_name'],
-      latitude: json['latitude'],
-      longitude: json['longitude'],
-      locationType: json['location_type'],
-      address: json['address'],
-      description: json['description'],
-      hours: json['hours'],
+      id: json['id']!,
+      resourceName: json['resource_name']!,
+      latitude: json['latitude']!,
+      longitude: json['longitude']!,
+      locationType: json['location_type']!,
+      address: json['address']!,
+      description: json['description']!,
+      hours: json['hours']!,
     );
   }
 
