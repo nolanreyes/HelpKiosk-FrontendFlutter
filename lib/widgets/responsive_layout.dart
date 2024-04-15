@@ -5,7 +5,24 @@ import 'package:helpkiosk_frontend/widgets/balance_display.dart';
 import 'package:helpkiosk_frontend/widgets/weather_widget.dart';
 import 'package:helpkiosk_frontend/widgets/chatbot_widget.dart';
 
-class ResponsiveLayout extends StatelessWidget {
+class ResponsiveLayout extends StatefulWidget {
+  @override
+  _ResponsiveLayoutState createState() => _ResponsiveLayoutState();
+}
+
+class _ResponsiveLayoutState extends State<ResponsiveLayout> {
+  Key key = UniqueKey();
+
+  // Reload button for  demo
+  void reloadPage() {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (BuildContext context) => super.widget,
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     bool isLargeScreen = MediaQuery.of(context).size.width > 768;
@@ -66,7 +83,7 @@ class ResponsiveLayout extends StatelessWidget {
                     child: _roundedContainer(MapWidget()),
                   ),
                   Container(
-                    height: 100,
+                    height: 120,
                     width: double.infinity,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -77,6 +94,10 @@ class ResponsiveLayout extends StatelessWidget {
                   ),
                 ],
               ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: reloadPage,
+        child: Icon(Icons.refresh),
       ),
     );
   }
