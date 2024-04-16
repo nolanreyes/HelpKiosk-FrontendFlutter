@@ -49,8 +49,8 @@ class ResourceSelector extends StatelessWidget {
       child: isLargeScreen
           ? GridView.count(
               crossAxisCount: 2,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 35,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 30,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: buttons)
