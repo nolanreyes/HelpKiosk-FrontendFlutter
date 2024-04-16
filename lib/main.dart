@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:helpkiosk_frontend/controllers/locations_controller.dart';
-import 'package:helpkiosk_frontend/controllers/weather_controller.dart';
 import 'package:helpkiosk_frontend/widgets/responsive_layout.dart';
+import 'package:helpkiosk_frontend/donation_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,12 +16,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'HELP APP',
-      home: Scaffold(
-        backgroundColor: Colors.grey[200], // Set the background color here
-        body: SafeArea(
-          child: ResponsiveLayout(),
-        ),
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Scaffold(
+              backgroundColor: Colors.grey[200], // Set the background color here
+              body: SafeArea(
+                child: ResponsiveLayout(),
+              ),
+            ),
+        '/donate': (context) => DonationPage(),
+      },
     );
   }
 }

@@ -13,16 +13,6 @@ class ResponsiveLayout extends StatefulWidget {
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   Key key = UniqueKey();
 
-  // Reload button for  demo
-  void reloadPage() {
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(
-      builder: (BuildContext context) => super.widget,
-    ),
-  );
-}
-
   @override
   Widget build(BuildContext context) {
     bool isLargeScreen = MediaQuery.of(context).size.width > 768;
@@ -94,10 +84,6 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
                   ),
                 ],
               ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: reloadPage,
-        child: Icon(Icons.refresh),
       ),
     );
   }
