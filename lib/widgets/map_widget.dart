@@ -7,14 +7,12 @@ import 'package:helpkiosk_frontend/models/locations.dart';
 import 'package:helpkiosk_frontend/constants.dart';
 import 'package:http/http.dart' as http;
 
-// Widget for displaying the map content
 class MapContent extends StatefulWidget {
   @override
   _MapContentState createState() => _MapContentState();
 }
 
 class _MapContentState extends State<MapContent> {
-  // Initialize the locations controller
   LocationsController locationsController = Get.put(LocationsController());
 
   String message = '';
@@ -22,14 +20,11 @@ class _MapContentState extends State<MapContent> {
   @override
   void initState() {
     super.initState();
-    // Fetch locations and set the marker tap handler on initialization
     locationsController.fetchLocations();
     locationsController.onMarkerTap = handleMarkerTap;
   }
 
-  // Handler for when a marker is tapped
   void handleMarkerTap(Location location) {
-    // Show a dialog with location details and a button for getting directions
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -40,12 +35,10 @@ class _MapContentState extends State<MapContent> {
                 height: MediaQuery.of(context).size.height * 0.5,
                 width: MediaQuery.of(context).size.width * 0.5,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0), // Add padding here
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    // Center the children vertically
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    // Center the children horizontally
                     children: <Widget>[
                       Text(location.resourceName,
                           style: TextStyle(
@@ -74,15 +67,22 @@ class _MapContentState extends State<MapContent> {
                           // implement code for directions
                         },
                       ),
-                      // Check if the location is a shelter
                       if (location.locationType == 'SHELTER')
-                        TextButton(
-                          child: Text("Book Accommodation"),
-                          onPressed: () {
-                            allocateBedToGuest(setState);
-                          },
+                        Container(
+                          width: 200,
+                          height: 50,
+                          child: ElevatedButton(
+                            child: Text("Book Accommodation"),
+                            onPressed: () {
+                              allocateBedToGuest(setState);
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(Color(0xFF8247FF)),
+                              foregroundColor: MaterialStateProperty.all(Colors.white),
+                            ),
+                          ),
                         ),
-                      Text(message), // Display the message here
+                      Text(message),
                     ],
                   ),
                 ),
@@ -140,14 +140,12 @@ class _MapContentState extends State<MapContent> {
           ],
         );
       } else {
-        // Show a loading spinner if the locations are not yet loaded
         return Center(child: CircularProgressIndicator());
       }
     });
   }
 }
 
-// Widget for displaying the map
 class MapWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
